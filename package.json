@@ -1,7 +1,7 @@
 {
-  "homepage": "https://developerfolio.js.org/",
-  "name": "developerfolio",
-  "version": "0.1.0",
+  "homepage": "https://carmelofiorello.com/",
+  "name": "saadpasta.github.io",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "colorthief": "^2.3.0",
@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"./**/*.{js,css,json,scss}\"",
-    "check-format": "prettier -c \"./**/*.{js,css,json,scss}\""
+    "check-format": "prettier -c \"./**/*.{js,css,json,scss}\"",
+    "release": "release-it"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,6 +54,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "dotenv": "^8.2.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.1",
+    "release-it": "^17.0.0"
   }
 }

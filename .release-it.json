@@ -1,0 +1,24 @@
+{
+  "git": {
+    "requireBranch": "master",
+    "commitMessage": "chore: release v${version}",
+    "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs"
+  },
+  "hooks": {
+    "before:init": ["git pull"],
+    "after:bump": [
+      "npm i",
+      "npm run build",
+      "npx auto-changelog -o docs/Changelog.md -p"
+    ]
+  },
+  "npm": {
+    "skipChecks": true,
+    "publish": false
+  },
+
+  "github": {
+    "release": true
+    
+  }
+}
