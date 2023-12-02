@@ -1,12 +1,17 @@
-fs = require("fs");
+const fs = require("fs");
 const https = require("https");
-process = require("process");
+const process = require("process");
 require("dotenv").config();
 
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
 const USE_GITHUB_DATA = process.env.USE_GITHUB_DATA;
 const MEDIUM_USERNAME = process.env.MEDIUM_USERNAME;
+
+console.log(`GITHUB_TOKEN: ${GITHUB_TOKEN}`);
+console.log(`GITHUB_USERNAME: ${GITHUB_USERNAME}`);
+console.log(`USE_GITHUB_DATA: ${USE_GITHUB_DATA}`);
+console.log(`MEDIUM_USERNAME: ${MEDIUM_USERNAME}`);
 
 const ERR = {
   noUserName:
@@ -22,7 +27,7 @@ if (USE_GITHUB_DATA === "true") {
   }
 
   console.log(`Fetching profile data for ${GITHUB_USERNAME}`);
-  var data = JSON.stringify({
+  const data = JSON.stringify({
     query: `
 {
   user(login:"${GITHUB_USERNAME}") { 

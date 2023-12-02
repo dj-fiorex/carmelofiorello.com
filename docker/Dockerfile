@@ -5,6 +5,7 @@ FROM node:${NODE_VERSION}-alpine as base
 RUN apk add --no-cache git
 
 RUN npm install -g serve
+RUN npm install -g dotenv
 
 # Install dependencies only when needed
 FROM base AS deps
