@@ -45,8 +45,6 @@ jobs:
 
       - name: Set up Node.js npm token
         run: echo -e "GITHUB_USERNAME=${GITHUB_USERNAME}\nREACT_APP_GITHUB_TOKEN=${GITHUB_TOKEN}\nUSE_GITHUB_DATA=true\nMEDIUM_USERNAME=${MEDIUM_USERNAME}" > .env
-      - name: Print out env
-        run: cat .env
 
       - name: Build and push
         uses: docker/build-push-action@v5

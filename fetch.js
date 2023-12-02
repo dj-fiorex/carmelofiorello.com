@@ -8,7 +8,6 @@ const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
 const USE_GITHUB_DATA = process.env.USE_GITHUB_DATA;
 const MEDIUM_USERNAME = process.env.MEDIUM_USERNAME;
 
-console.log(`GITHUB_TOKEN: ${GITHUB_TOKEN}`);
 console.log(`GITHUB_USERNAME: ${GITHUB_USERNAME}`);
 console.log(`USE_GITHUB_DATA: ${USE_GITHUB_DATA}`);
 console.log(`MEDIUM_USERNAME: ${MEDIUM_USERNAME}`);
