@@ -3,46 +3,21 @@ version: "3"
 services:
   carmelofiorello:
     container_name: carmelofiorello
-    image: ghcr.io/dj-fiorex/developerFolio:latest
-    #ports: We don't need to expose the port because we are using the nginx-proxy
+    image: ghcr.io/dj-fiorex/carmelofiorello.com:latest
+    #ports: We don't need to expose the port because we are using the traefik
     #  - '3000:3000'
-    environment:
-      - VIRTUAL_HOST=carmelofiorello.com
-      - VIRTUAL_PORT=3000
-      - LETSENCRYPT_HOST=carmelofiorello.com
-      - VIRTUAL_PATH=/
-    depends_on:
-      - nginx-proxy
-      - nginx-proxy-acme
-    env_file:
-      - stack.env
+    networks:
+      - traefik
 
-  nginx-proxy:
-    image: nginxproxy/nginx-proxy
-    container_name: nginx-proxy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "/etc/nginx/vhost.d"
-      - "/usr/share/nginx/html"
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
-      - nginx-proxy-certs:/etc/nginx/certs:rw
+    restart: unless-stopped
 
-  nginx-proxy-acme:
-    container_name: nginx-proxy-acme
-    image: nginxproxy/acme-companion
-    restart: always
-    environment:
-      - DEFAULT_EMAIL=carmelofiorello@gmail.com
-      - FILES_UID=1883 # UID of the user that owns the files in the mounted volume that is the UID of the mosquitto user
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - acme:/etc/acme.sh
-    volumes_from:
-      - "nginx-proxy"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.carmelofiorello.loadbalancer.server.port=3000"
+      - "traefik.http.routers.carmelofiorello.rule=Host(`carmelofiorello.com`)"
+      - "traefik.http.routers.carmelofiorello.entrypoints=websecure"
+      - "traefik.http.routers.carmelofiorello.tls.certresolver=letsencryptresolver"
 
-volumes:
-  nginx-proxy-certs:
-  acme:
+networks:
+  traefik:
+    external: true
