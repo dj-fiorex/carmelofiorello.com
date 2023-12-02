@@ -38,9 +38,10 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-COPY --from=deps /app/node_modules ./node_modules
+# Copy only fetch.js and build folder
 
-COPY . .
+COPY --from=builder /app/fetch.js ./fetch.js
+
 COPY --from=builder /app/build ./build
 
 EXPOSE 3000
