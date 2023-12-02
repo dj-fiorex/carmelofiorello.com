@@ -1,7 +1,7 @@
 {
   "homepage": "https://carmelofiorello.com/",
   "name": "saadpasta.github.io",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "dependencies": {
     "colorthief": "^2.3.0",
