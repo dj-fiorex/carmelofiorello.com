@@ -64,6 +64,6 @@ jobs:
             type=gha,scope=${{ env.IMAGE_NAME }}-${{ github.event.release.tag_name }},mode=max
           platforms: ${{ env.TARGET_PLATFORMS }}
           tags: ${{ env.IMAGE }}:${{ github.event.release.tag_name }},${{ env.IMAGE }}:latest
-      # - name: Send POST to Portainer
-      #   run: |
-      #     curl --request POST https://portainer.current-project.dev/api/stacks/webhooks/a392148c-d2af-460e-9f47-399e711972a4
+      - name: Send POST to Portainer
+        run: |
+          curl --request POST https://portainer.carmelofiorello.com/api/stacks/webhooks/daf06618-eb17-4c18-9bf1-f9310f48447a
