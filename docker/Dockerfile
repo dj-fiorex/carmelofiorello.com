@@ -47,4 +47,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD serve -s build -l $PORT
+CMD node fetch.js && serve -s build -l $PORT
