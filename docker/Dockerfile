@@ -5,7 +5,6 @@ FROM node:${NODE_VERSION}-alpine as base
 RUN apk add --no-cache git
 
 RUN npm install -g serve
-RUN npm install -g dotenv
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -28,6 +27,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN \
+    --mount=type=secret,required=true,id=env,target=/app/.env \
     if [ -f yarn.lock ]; then yarn build; \
     elif [ -f package-lock.json ]; then npm run build; \
     else echo "[BUILDER] Lockfile not found." && exit 1; \
@@ -41,12 +41,10 @@ ENV NODE_ENV production
 
 # Copy only fetch.js and build folder
 
-COPY --from=builder /app/fetch.js ./fetch.js
-
 COPY --from=builder /app/build ./build
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-CMD node fetch.js && serve -s build -l $PORT
+CMD serve -s build -l $PORT

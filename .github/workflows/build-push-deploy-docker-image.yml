@@ -42,11 +42,19 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js npm token
+        run: echo -e "GITHUB_USERNAME=${GITHUB_USERNAME}\nREACT_APP_GITHUB_TOKEN=${GITHUB_TOKEN}\nUSE_GITHUB_DATA=true\nMEDIUM_USERNAME=${MEDIUM_USERNAME}" > .env
+      - name: Print out env
+        run: cat .env
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: docker/Dockerfile
+          secret-files: |
+            env=.env
           push: true
           cache-from: |
             type=gha,scope=${{ env.IMAGE_NAME }}:cache
